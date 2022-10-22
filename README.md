@@ -1,7 +1,42 @@
 # **MS103 / Tom Sikora**
 # 1) Configuration d'un poste de travail sous Linux
 
+<br>
+
+**Sommaire**
+- Partie 1 : [TP d'installation](https://iut-info.univ-reims.fr/users/cutrona/restricted/installation-configuration/linux/) jusqu'à la partie 10.3 incluse
+  - 4) Création de votre machine virtuelle dans OpenNebula
+  - 5) Utilisation de « Remote Viewer » pour accéder à votre machine virtuelle OpenNebula
+  - 6) Installation d'une distribution Xubuntu
+    - 6.1) Configuration des partitions de stockage
+    - 6.2) Première connexion et environnement de travail
+  - 7) Découverte de la configuration d'un système Linux Ubuntu
+  - 8) Gestion des utilisateurs
+    - 8.1) Configuration et utilisation de la commande sudo
+    - 8.2) Gestion des utilisateurs
+  - 9) Le système de fichiers
+    - 9.1) Liens symboliques
+    - 9.2) Étude de l’arborescence Linux Standard (FHS)
+  - 10) Installation d'outils essentiels
+    - 10.1) Outils présents dans les dépôts Ubuntu
+    - 10.2) Outils présents dans des dépôts autres que ceux d'Ubuntu
+    - 10.3) Outils sous forme de paquet deb
+- Partie 2 : Création d'utilisateurs
+
+- Partie 3 : Installation d'outils
+
+- Structure du projet
+
+- Problèmes rencontrés
+
+<br>
+
+<hr>
+
+<br>
+
 ## Partie 1 : [TP d'installation](https://iut-info.univ-reims.fr/users/cutrona/restricted/installation-configuration/linux/) jusqu'à la partie 10.3 incluse
+
 ## 4) Création de votre machine virtuelle dans OpenNebula
 1. Accès à l'interface Web du cloud [OpenNebula](http://one-frontend:9869/)
 2. Connexion avec notre compte universitaire pour accéder à notre tableau de bord
@@ -21,11 +56,22 @@
 
 <br>
 
+<hr>
+
+<br>
+
 ## 5) Utilisation de « Remote Viewer » pour accéder à votre machine virtuelle OpenNebula
 1. Téléchargement de la machine vituelle
 2. Lancement de la machine vituelle en format .vv
 - Soit en double-cliquant sur le fichier "Install Ubuntu.vv"
-- Soit dans un terminal avec la commande ```remote-viewer répertoire/où/vous/avez/rangé/le/fichier/Install\ Ubuntu.vv```
+- Soit dans un terminal avec la commande :
+``` HTTP
+remote-viewer répertoire/où/vous/avez/rangé/le/fichier/Install\ Ubuntu.vv
+```
+
+<br>
+
+<hr>
 
 <br>
 
@@ -61,106 +107,229 @@
 
 <br>
 
-### 6.1) Configuration des partitions de stockage
-- ```sudo reboot``` : redémarrage de notre système après saisie de notre mot de passe
+### 6.2) Première connexion et environnement de travail
+- Redémarrage de notre système après saisie de notre mot de passe :
+```
+sudo reboot
+```
 1. Recherche des paramètres d'affichage dans le menu des applications
-2. La résolution est faible
+2. Résolution faible
 3. Augmentation de la résolution par rapport à la résolution native de notre écran
 
 <br>
 
+<hr>
+
+<br>
+
 ## 7) Découverte de la configuration d'un système Linux Ubuntu
-- ```uname -r``` : Affichage de la version du noyau Linux installé
-1. ```sudo apt update``` : Mise à jour de la liste des fichiers disponible dans le dépôt
-2. ```sudo apt dist-upgrade``` :  Mise à jour des paquets installés
-3. ```dpkg -l | grep "firefox"``` : Liste l’ensemble des paquets installés en filtrant l’affichage aux paquets contenant le mot firefox
-4. ```sudo apt install vim-gui-common``` : Installation du paquet "vim-gui-common" qui est un éditeur de texte avancé
-5. ```dpkg -l | grep "Cheese"``` : Recherche du paquet des fichiers de base de l'outil de capture photo/vidéo Cheese dans la liste des paquets installés
-- ```sudo apt remove cheese-common``` : Suppression du paquet "cheese-common" de notre système
+- Affichage de la version du noyau Linux installé :
+```
+uname -r
+```
+1. Mise à jour de la liste des fichiers disponible dans le dépôt :
+```
+sudo apt update
+```
+2. Mise à jour des paquets installés :
+```
+sudo apt dist-upgrade
+```
+3. Liste l’ensemble des paquets installés en filtrant l’affichage aux paquets contenant le mot firefox :
+```
+dpkg -l | grep "firefox"
+```
+4. Installation du paquet "vim-gui-common" qui est un éditeur de texte avancé :
+```
+sudo apt install vim-gui-common
+```
+5. Recherche du paquet des fichiers de base de l'outil de capture photo/vidéo Cheese dans la liste des paquets installés :
+```
+dpkg -l | grep "Cheese"
+```
+- Suppression du paquet "cheese-common" de notre système :
+```
+sudo apt remove cheese-common
+```
+
+<br>
+
+<hr>
 
 <br>
 
 ## 8) Gestion des utilisateurs
 ### 8.1) Configuration et utilisation de la commande sudo
-1. ```sudo evim /etc/sudoers``` : selon les droits de l'utilisateur "iut", je peux visionner le fichier mais pas le modifier. Avec la commande "sudo", le mot de passe de l'utilisateur est demandé et le fichier peut finalement être modifié.
-2. ```sudo evim /etc/group``` : Ouverture du fichier "group" qui contient les noms
- du groupe, le numéro d’identification du groupe (gid) et la liste des utilisateurs du groupe
-3. ```grep "sudo" /etc/group``` : Sans "sudo", je peux visionner le fichier (*group*) mais pas le modifier.
+1. Selon les droits de l'utilisateur "iut", je peux visionner le fichier mais pas le modifier. Avec la commande "sudo", le mot de passe de l'utilisateur est demandé et le fichier peut finalement être modifié
+```
+sudo evim /etc/sudoers
+```
+2. Ouverture du fichier "group" qui contient les noms du groupe, le numéro d’identification du groupe (gid) et la liste des utilisateurs du groupe
+```
+sudo evim /etc/group
+```
+3. Sans "sudo", je peux visionner le fichier (*group*) mais pas le modifier
+```
+grep "sudo" /etc/group
+```
 - Résultat : <span style="color:green">sudo:x:27:iut</span>
     - le nom du groupe est "sudo"
     - le gid du groupe est "27"
     - l'utilisateur du groupe est "iut"
-1. Non car comme précédemment, je peux visionner le fichier (*syslog*) sans utiliser "sudo"
-2. Ici, j'ai besoin de la commande  "sudo" pour visionner le fichier (*shadow*)
+4. Non car comme précédemment, je peux visionner le fichier (*syslog*) sans utiliser "sudo"
+5. Ici, j'ai besoin de la commande  "sudo" pour visionner le fichier (*shadow*)
 
 <br>
 
 ### 8.2) Gestion des utilisateurs
 #### **Partie 1**
-1. ```man adduser``` : Ouverture du manuel de "adduser"
+1. Ouverture du manuel de *adduser* :
+```
+man adduser
+```
 2. L'uid de iut est **1000** : <span style="color:green">uid=1000(iut)</span>
 3. Le groupe principal de iut est **adm** ou **administrateur** : <span style="color:green">adm:x:4:syslog,iut</span>
-4. L’uid du prochain utilisateur créé par défaut sera 1001
-5. ```sudo addgroup invite``` : Création du groupe "invite"
-6. ```sudo adduser --home /home/utilisateur1 --ingroup user1``` : Création d'un nouvel utilisateur
+4. L’uid du prochain utilisateur créé par défaut sera **1001**
+5. Création du groupe *invite* :
+```
+sudo addgroup invite
+```
+6. Création d'un nouvel utilisateur :
+```
+sudo adduser --home /home/utilisateur1 --ingroup user1
+```
 - le nom de l'utilisateur est user1
 - le répertoire d'accueil de l'utilisateur est */home/utilisateur1*
 7. <span style="color:purple">CTRL+ALT+F1</span> : Affichage de la console de connexion en mode texte
 8. Connexion à l'utilisateur user1 :
 - Nom d'utilisateur : user1
 - Mot de passe : user1
-- ```pwd``` : Affichage du chemin absolu
+- Affichage du chemin absolu :
+```
+pwd
+```
 9. Replacement sur l'utilisateur iut :
-- ```exit``` : Déconnexion de l'utilisateur user1
+- Déconnexion de l'utilisateur user1 :
+```
+exit
+```
 - <span style="color:purple">CTRL+ALT+F7</span> : Affichage de la console de connexion en mode graphique
-- ```su - user1``` : Connexion plus pratique à l'utilisateur user1
-- ```echo $USER``` : Affichage de l'utilisateur (user1)
+- Connexion plus pratique à l'utilisateur user1 :
+```
+su - user1
+```
+- Affichage de l'utilisateur (user1) :
+```
+echo $USER
+```
+
+<br>
+
 #### **Partie 2**
-1. ```sudo evim /var/log/syslog``` : Ouverture du fichier (*syslog*) mais user1 ne fait pas partie du groupe sudo et donc ne peut pas ouvrir ce fichier
+1. Ouverture du fichier (*syslog*) mais user1 ne fait pas partie du groupe sudo et donc ne peut pas ouvrir ce fichier
+```
+sudo evim /var/log/syslog
+```
 2. Changement des privilèges de l’utilisateur user1
-- ```exit``` : Déconnexion de l'utilisateur user1
-- ```sudo adduser user1 adm``` : Ajout de l'utilisateur user1 au groupe adm (administrateur)
-3. ```su - user1``` : Connexion à l'utilisateur user1
-- ```sudo evim /var/log/syslog``` : Ouverture du fichier (*syslog*)
+- Déconnexion de l'utilisateur user1 :
+```
+exit
+```
+- Ajout de l'utilisateur user1 au groupe adm (administrateur) :
+```
+sudo adduser user1 adm
+```
+3. Connexion à l'utilisateur user1 :
+```
+su - user1
+```
+- Ouverture du fichier (*syslog*) :
+```
+sudo evim /var/log/syslog
+```
 - Sans sudo = permission de lecture mais pas d'écriture
 - Avec sudo = permission de lecture et d'écriture
-4. ```exit``` : Déconnexion de l'utilisateur user1
+4. Déconnexion de l'utilisateur user1  :
+```
+exit
+```
+
+<br>
+
+<hr>
 
 <br>
 
 ## 9) Le système de fichiers
 ### 9.1) Liens symboliques
-1. ```ls -la /usr/lib``` : Listage du contenu du dossier *(/lib)*, les fichiers dont le type est désigné par **l** correspond à un lien symbolique
-2. ```ln -s /tmp monTemp``` : Création d'un lien symbolique vers */tmp* avec le nom "monTemp" dans notre répertoire d’accueil
+1. Listage du contenu du dossier *(/lib)*, les fichiers dont le type est désigné par **l** correspond à un lien symbolique :
+```
+ls -la /usr/lib
+```
+2. Création d'un lien symbolique vers */tmp* avec le nom "monTemp" dans notre répertoire d’accueil :
+```
+ln -s /tmp monTemp
+```
 
 <br>
 
 ### 9.2) Étude de l’arborescence Linux Standard (FHS)
 1. Documentation wikipedia du [FHS](https://fr.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
-2. ```cat /proc/cpuinfo``` : Affichage du fichier (*cpuinfo*) contenant les informations du processeur
+2. Affichage du fichier (*cpuinfo*) contenant les informations du processeur :
+```
+cat /proc/cpuinfo
+```
 - Le type du processeur est "Xeon"
 - La fréquence du processeur est de 2194.842 MHz ou 2.20 GHz
-3. ```cat /usr/share/bash-completion/bash-completion``` : Affichage du fichier (*bash-completion*) contenant le manuel de la commande "bash"
-4. ```cat /proc/version``` : Affichage du fichier (*version*)
+3. Affichage du fichier (*bash-completion*) contenant le manuel de la commande "bash" :
+```
+cat /usr/share/bash-completion/bash-completion
+```
+4. Affichage du fichier (*version*) :
+```
+cat /proc/version
+```
 - La version du noyau est 5.15.0-48-generic
 5. Le répertoire qui regroupe les logs du système est */var/log/syslog*
 
 <br>
 
+<hr>
+
+<br>
+
 ## 10) Installation d'outils essentiels
 ### 10.1) Outils présents dans les dépôts Ubuntu
-1. ```sudo apt install git``` : Installation du paquet "git"
-2. ```sudo apt install vlc``` : Installation du paquet "vlc"
+1. Installation du paquet "git" :
+```
+sudo apt install git
+```
+2. Installation du paquet "vlc" :
+```
+sudo apt install vlc
+```
 
 <br>
 
 ### 10.2) Outils présents dans des dépôts autres que ceux d'Ubuntu
 1. Installation de **Google Chrome**
 - Documentation [Ubuntu concernant Google Chrome](https://doc.ubuntu-fr.org/google_chrome)
-- ```sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'``` : Ajout du dépôt de Google à nos dépôts connus
-- ```wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -``` : Ajout de la clé publique du dépôt à notre liste de clés fiables
-- ```sudo apt update``` : Mise à jour de notre liste de paquet
-- ```sudo apt install google-chrome-stable``` : Installation de Google Chrome dans sa version stable
+- Ajout du dépôt de Google à nos dépôts connus :
+```
+sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+```
+- Ajout de la clé publique du dépôt à notre liste de clés fiables :
+```
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+```
+- Mise à jour de notre liste de paquet :
+```
+sudo apt update
+```
+- Installation de Google Chrome dans sa version stable :
+```
+sudo apt install google-chrome-stable
+```
 
 <br>
 
@@ -168,132 +337,278 @@
 1. Installation de Teams
 - Téléchargement de [Teams](https://www.microsoft.com/fr-fr/microsoft-teams/download-app) sous forme de paquet DEB
 - Ouverture d'un terminal
-- ```sudo dpkg -i ~/Téléchargements/teams_1.5.00.23861_amd64.deb``` : Installation du paquet DEB
+- Installation du paquet DEB :
+```
+sudo dpkg -i ~/Téléchargements/teams_1.5.00.23861_amd64.deb
+```
 - Lancement de Teams (fonctionnel)
 
 <br>
 
+<hr>
+
+<br>
+
 ## Partie 2 : Création d'utilisateurs
-1. ```sudo adduser --home /home/siko0001 --uid 63725 --gid 100 siko0001``` : Création d'un nouvel utilisateur sans privilèges
+1. Création d'un nouvel utilisateur sans privilèges :
+```
+sudo adduser --home /home/siko0001 --uid 63725 --gid 100 siko0001
+```
 - le nom de l'utilisateur est siko0001
 - le répertoire d'accueil de l'utilisateur est */home/siko0001*
 - l'identifiant (uid) de l'utilisateur est 63725
 - L'identifiant de groupe (gid) de l'utilisateur est 100
 - Nouveau mot de passe : 026d1280
-2. ```sudo adduser --home /home/administrateur --uid 37705 --gid 100 admin``` : Création d'un nouvel utilisateur avec droits d'administration
+2. Création d'un nouvel utilisateur avec droits d'administration :
+```
+sudo adduser --home /home/administrateur --uid 37705 --gid 100 admin
+```
 - le nom de l'utilisateur est admin
 - le répertoire d'accueil de l'utilisateur est */home/administrateur*
 - l'identifiant (uid) de l'utilisateur est 37705
 - L'identifiant de groupe (gid) de l'utilisateur est 100
 - Nouveau mot de passe : 463ab9fc
-- ```sudo adduser admin sudo``` : Ajout de l'utilisateur admin dans le groupe sudo
+- Ajout de l'utilisateur admin dans le groupe sudo :
+```
+sudo adduser admin sudo
+```
+
+<br>
+
+<hr>
 
 <br>
 
 ## Partie 3 : Installation d'outils
 1. Installation de Python 3 :
-- ```sudo apt install python3``` : Installation du paquet [python3](https://www.python.org/download/releases/3.0/) (déjà installé et fonctionnel)
-    - ```sudo touch test.py``` : Création d'un fichier "test.py"
-    - ```python3 test.py``` : Lance le fichier test.py avec le langage Python 3.0
-<br>![python3](img/python3.png)
+- Installation du paquet [python3](https://www.python.org/download/releases/3.0/) (déjà installé et fonctionnel) :
+```
+sudo apt install python3
+```
+- Création d'un fichier "test.py" :
+```
+sudo touch test.py
+```
+- Lance le fichier test.py avec le langage Python 3.0 et redirige la sortie dans un fichier "sortie_python.txt" :
+```
+python3 test.py
+```
+![python3](img/python3.png)
 
 <br>
 
 2. Installation des formateurs de code source :
-- ```sudo apt install black``` : Installation du paquet [black](https://github.com/psf/black) (fonctionnel)
-    - ```black {test.py}``` : Lance le formatage du code Python du fichier test.py
-<br>![black](img/black.png)
+- Installation du paquet [black](https://github.com/psf/black) (fonctionnel) :
+```
+sudo apt install black
+```
+- Lance le formatage du code Python du fichier test.py :
+```
+black {test.py}
+```
+![black](img/black.png)
 
 <br>
 
-- ```sudo apt install isort``` : Installation du paquet [isort](https://github.com/PyCQA/isort) (fonctionnel)
-    - ```sudo touch isort_test.py``` : Création d'un fichier "isort_test.py"
-    - ```sudo evim isort_test.py``` : Ajout des importations tests
-    - ```sudo isort isort_test.py``` :  Lance dans le code Python le tri des importations par ordre alphabétique
+- Installation du paquet [isort](https://github.com/PyCQA/isort) (fonctionnel) :
+```
+sudo apt install isort
+```
+- Création d'un fichier "isort_test.py" :
+```
+sudo touch isort_test.py
+```
+- Ajout des importations tests :
+```
+sudo evim isort_test.py
+```
+- Lance dans le code Python le tri des importations par ordre alphabétique :
+```
+sudo isort isort_test.py
+```
 
-        |             AVANT              |             APRES              |
-        |:------------------------------:|:------------------------------:|
-        | ![isort1](img/avant_isort.png) | ![isort2](img/apres_isort.png) |
+|             AVANT              |             APRES              |
+|:------------------------------:|:------------------------------:|
+| ![isort1](img/avant_isort.png) | ![isort2](img/apres_isort.png) |
 
 <br>
 
 3. Installation des analyseurs statiques de code :
-- ```sudo apt install bandit``` : Installation du paquet [bandit](https://github.com/PyCQA/bandit) (fonctionnel)
-    - ```sudo bandit test.py``` : Recherche de problèmes de sécurité courants dans le code Python du fichier "test.py"
-<br>![bandit](img/test_bandit.png)
+- Installation du paquet [bandit](https://github.com/PyCQA/bandit) (fonctionnel) :
+```
+sudo apt install bandit
+```
+- Recherche de problèmes de sécurité courants dans le code Python du fichier "test.py" :
+```
+sudo bandit test.py
+```
+![bandit](img/test_bandit.png)
 
 <br>
 
-- ```sudo apt install pyflakes``` : Installation du paquet [pyflakes](https://github.com/PyCQA/pyflakes) (fonctionnel)
-    - ```sudo touch test_pyflakes.py``` : Création d'un fichier "test_pyflakes.py"
-    - ```sudo evim test_pyflakes.py``` : Ajout d'une fonction test "Moyenne"
-<br>![pyflakes2](img/pyflakes2.png)
-    - ```sudo python3 -m pyflakes test_pyflakes.py``` :  Lance dans le code Python la vérification des fichiers source et de leurs éventuelles erreurs
-<br>![pyflakes1](img/pyflakes1.png) : Ici, la fonction "randint()" (ligne 12) n'est pas trouvée car elle n'a pas été importé
+- Installation du paquet [pyflakes](https://github.com/PyCQA/pyflakes) (fonctionnel) :
+```
+sudo apt install pyflakes
+```
+- Création d'un fichier "test_pyflakes.py" :
+```
+sudo touch test_pyflakes.py
+```
+- Ajout d'une fonction test "Moyenne" :
+```
+sudo evim test_pyflakes.py
+```
+![pyflakes2](img/pyflakes2.png)
+- Lance dans le code Python la vérification des fichiers source et de leurs éventuelles erreurs :
+```
+sudo python3 -m pyflakes test_pyflakes.py
+```
+![pyflakes1](img/pyflakes1.png) : Ici, la fonction "randint()" (ligne 12) n'est pas trouvée car elle n'a pas été importé
 
 <br>
 
 4. Installation d'un outil de vérification d’annotations de type :
-- ```sudo apt install mypy``` : Installation du paquet [mypy](https://github.com/python/mypy) (fonctionnel)
-    - ```sudo touch mypy_test.py``` : Création d'un fichier "mypy_test.py"
-    - ```sudo evim mypy_test.py``` : Ajout d'un test en Python
-<br>![mypy1](img/mypy1.png)
-    - ```sudo isort isort_test.py``` :  Lance dans le code Python la vérification d'une utilisation correct des variables et des fonctions
-<br> ![mypy2](img/mypy2.png) : Ici, nombre est de type str (chaine de caractères) donc l'addition avec le chiffre 1 n'est pas possible. Pour que cela fonctionne, il faut ajouter la fonction "int()" avant la fonction "input()"
+- Installation du paquet [mypy](https://github.com/python/mypy) (fonctionnel) :
+```
+sudo apt install mypy
+```
+- Création d'un fichier "mypy_test.py" :
+```
+sudo touch mypy_test.py
+```
+- Ajout d'un test en Python :
+```
+sudo evim mypy_test.py
+```
+![mypy1](img/mypy1.png)
+- Lance dans le code Python la vérification d'une utilisation correct des variables et des fonctions :
+```
+sudo isort isort_test.py
+```
+![mypy2](img/mypy2.png) : Ici, nombre est de type str (chaine de caractères) donc l'addition avec le chiffre 1 n'est pas possible. Pour que cela fonctionne, il faut ajouter la fonction "int()" avant la fonction "input()"
 
 <br>
 
 5. Installation d'un outil de génération de documentation HTML à partir de docstrings :
-- ```sudo apt install doxygen``` : Installation du paquet [doxygen](https://github.com/doxygen/doxygen) (fonctionnel)
-    - ```sudo touch doxygen_test.py``` : Création d'un fichier "doxygen_test.py"
-    - ```sudo evim doxygen_test.py``` : Ajout d'exemples de commentaires
-<br>![doxygen](img/doxygen.png)
+- Installation du paquet [doxygen](https://github.com/doxygen/doxygen) (fonctionnel) :
+```
+sudo apt install doxygen
+```
+- Création d'un fichier "doxygen_test.py" :
+```
+sudo touch doxygen_test.py
+```
+- Ajout d'exemples de commentaires :
+```
+sudo evim doxygen_test.py
+```
+![doxygen](img/doxygen.png)
 
 <br>
 
 6. Installation d'un cadriciel de tests unitaires :
-- ```sudo apt install check``` : Installation du paquet [check](https://github.com/libcheck/check)
-    - ```sudo touch check_test.py``` : Création d'un fichier "check_test.py"
-    - ```sudo evim check_test.py``` : Ajout d'une fonction test
-<br>![check](img/check.png)
+- Installation du paquet [check](https://github.com/libcheck/check):
+```
+sudo apt install check
+```
+- Création d'un fichier "check_test.py" :
+```
+sudo touch check_test.py
+```
+- Ajout d'une fonction test :
+```
+sudo evim check_test.py
+```
+![check](img/check.png)
 
 <br>
 
 7. Installation de la bibliothèque pygame (grâce à python3) :
-- ```sudo apt-get install python3-pygame``` : Installation du paquet [pygame](https://github.com/pygame/pygame) (fonctionnel)
-    - ```sudo touch test_pygame.py``` : Création d'un fichier "test_pygame.py"
-    - ```sudo evim test_pygame.py``` : Ajout d'un programme simple qui affiche un rectangle bleu dans un canvas
-<br>![pygame1](img/pygame.png)
-    - ```python3 test_pygame.py``` : Lance le fichier "test_pygame.py" avec Python
-<br>![pygame2](img/pygame2.png)
+- Installation du paquet [pygame](https://github.com/pygame/pygame) (fonctionnel) :
+```
+sudo apt-get install python3-pygame
+```
+- Création d'un fichier "test_pygame.py" :
+```
+sudo touch test_pygame.py
+```
+- Ajout d'un programme simple qui affiche un rectangle bleu dans un canvas :
+```
+sudo evim test_pygame.py
+```
+![pygame1](img/pygame.png)
+- Lance le fichier "test_pygame.py" avec Python :
+```
+python3 test_pygame.py
+```
+![pygame2](img/pygame2.png)
 
 <br>
 
 8. Installation de Git :
-- ```sudo apt install git``` : Installation du paquet [git](https://github.com/git/git) (déjà installé et fonctionnel)
-    - ```cd /home/iut/Documents``` : on se place dans */Documents* afin de créer un simple dépôt local
-    - ```sudo touch exemple.txt``` : Création d'un fichier test "exemple.txt"
-    - ```git init``` : Initialisation d'un dépôt local contenant "exemple.txt"
-<br>![git](img/git.png)
+- Installation du paquet [git](https://github.com/git/git) (déjà installé et fonctionnel) :
+```
+sudo apt install git
+```
+- On se place dans */Documents* afin de créer un simple dépôt local :
+```
+cd /home/iut/Documents
+```
+- Création d'un fichier test "exemple.txt" :
+```
+sudo touch exemple.txt
+```
+- Initialisation d'un dépôt local dans *Document/* contenant "exemple.txt" :
+```
+git init
+```
+![git](img/git.png)
 
 <br>
 
 9. Installation de Meld (outil de comparaison et de fusion) :
-- ```sudo apt install meld``` : Installation du paquet [meld](https://github.com/GNOME/meld) (fonctionnel)
-    - ```sudo touch test_meld1.txt``` Création d'un premier fichier de comparaison
-    - ```sudo evim test_meld1.txt``` : Ajout d'une texte à comparer
-    - ```sudo touch test_meld2.txt``` Création d'un deuxième fichier de comparaison
-    - ```sudo evim test_meld2.txt``` : Ajout d'une texte à comparer
-    - ```meld test_meld1.txt test_meld2.txt``` : Permet de comparer le contenu des deux fichiers
-<br>![meld](img/meld.png)
+- Installation du paquet [meld](https://github.com/GNOME/meld) (fonctionnel) :
+```
+sudo apt install meld
+```
+- Création d'un premier fichier de comparaison :
+```
+sudo touch test_meld1.txt
+```
+- Ajout d'une texte à comparer :
+```
+sudo evim test_meld1.txt
+```
+- Création d'un deuxième fichier de comparaison :
+```
+sudo touch test_meld2.txt
+```
+- Ajout d'une texte à comparer :
+```
+sudo evim test_meld2.txt
+```
+- Permet de comparer le contenu des deux fichiers :
+```
+meld test_meld1.txt test_meld2.txt
+```
+![meld](img/meld.png)
 
 <br>
 
-10. Téléchargement de Visual Studio Code (en fichier .deb) :
+10.  Téléchargement de Visual Studio Code (en fichier .deb) :
 - Téléchargement du fichier .deb sur le site de [Visual Studio Code](https://code.visualstudio.com/Download)
-- ```sudo mv Téléchargements/code_1.72.2-1665614327_amd64.deb /home/siko0001/``` : Déplacement du fichier de *Téléchargement/* à */home/siko0001/*
-- ```cd /home/siko0001``` : On se place dans le répertoire */home/siko0001*
-- ```sudo dpkg -i /home/siko0001/code_1.72.2-1665614327_amd64.deb``` : Installation du paquet DEB
+- Déplacement du fichier de *Téléchargement/* à */home/siko0001/* :
+```
+sudo mv Téléchargements/code_1.72.2-1665614327_amd64.deb /home/siko0001/
+```
+- On se place dans le répertoire */home/siko0001* :
+```
+cd /home/siko0001
+```
+- Installation du paquet DEB :
+```
+sudo dpkg -i /home/siko0001/code_1.72.2-1665614327_amd64.deb
+```
 - Installation des extensions :
 
 |     Extensions      |           Image           |
@@ -302,14 +617,69 @@
 |       Gitlens       | ![gitlen](img/gitlen.png) |
 
 - Désactivation de la télémétrie : Fichier > Préférences > Paramètres > Application > Télémétrie (off)
-11. Ecriture de programmes Python :
-- ```sudo touch test.py``` : Création du fichier de test de programmes Python
-- ```sudo evim test.py``` : Ajout de 4 programmes Python
+11.  Ecriture de programmes Python :
+- Création du fichier de test de programmes Python :
+```
+sudo touch test.py
+```
+- Ajout de 4 programmes Python :
+```
+sudo evim test.py
+```
 - Sortie des programmes dans un fichier "sortie_python.txt"
 
 |           test.py (programmes)         |       sortie_python.txt (sortie)      |
 |:--------------------------------------:|:-------------------------------------:|
 |       ![python](img/test-py.png)       |   ![python](img/sortie_python.png)    |
 
-## Problème rencontrés
+<br>
+
+<hr>
+
+<br>
+
+## Structure du projet
+
+<br><span style="color:red">___home/___</span>
+<br>&emsp;&emsp;&emsp;<span style="color:orange">___iut/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Bureau/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Documents/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___exemple.txt___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Images/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Modèles/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___OpenDocument Spreadsheet.ods___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___OpenDocument Text.odt___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___Plain Text.txt___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___mon_serveur/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___index.html___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___mon_Temp___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Musique/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___public_html/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___bienvenue.html___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Téléchargements/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___PhpStorm-2022.2.2.tar.gz___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___teams_1.5.00.23861_amd64.deb___</span>
+<br>&emsp;&emsp;&emsp;&emsp;<span style="color:yellow">___Vidéos/___</span>
+<br>&emsp;&emsp;&emsp;<span style="color:orange">___siko0001/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___code_1.72.2-1665614327_amd64.deb___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___tests/___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:cyan">___check_test.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___doxygen_test.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___isort_test.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___mypy_test.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___sortie_python.txt___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_meld1.txt___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_meld2.txt___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pyflakes.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pygame.py___</span>
+<br>&emsp;&emsp;&emsp;<span style="color:orange">___administrateur/___</span>
+
+<br>
+
+<hr>
+
+<br>
+
+## Problèmes rencontrés
 - Aucun
