@@ -4,30 +4,30 @@
 <br>
 
 **Sommaire**
-- Partie 1 : [TP d'installation](https://iut-info.univ-reims.fr/users/cutrona/restricted/installation-configuration/linux/) jusqu'à la partie 10.3 incluse
-  - 4) Création de votre machine virtuelle dans OpenNebula
-  - 5) Utilisation de « Remote Viewer » pour accéder à votre machine virtuelle OpenNebula
-  - 6) Installation d'une distribution Xubuntu
-    - 6.1) Configuration des partitions de stockage
-    - 6.2) Première connexion et environnement de travail
-  - 7) Découverte de la configuration d'un système Linux Ubuntu
-  - 8) Gestion des utilisateurs
-    - 8.1) Configuration et utilisation de la commande sudo
-    - 8.2) Gestion des utilisateurs
-  - 9) Le système de fichiers
-    - 9.1) Liens symboliques
-    - 9.2) Étude de l’arborescence Linux Standard (FHS)
-  - 10) Installation d'outils essentiels
-    - 10.1) Outils présents dans les dépôts Ubuntu
-    - 10.2) Outils présents dans des dépôts autres que ceux d'Ubuntu
-    - 10.3) Outils sous forme de paquet deb
-- Partie 2 : Création d'utilisateurs
+- [Partie 1 : TP d'installation jusqu'à la partie 10.3 incluse](#partie-1--tp-dinstallation-jusquà-la-partie-103-incluse)
+  - [4) Création de votre machine virtuelle dans OpenNebula](#4-création-de-votre-machine-virtuelle-dans-opennebula)
+  - [5) Utilisation de « Remote Viewer » pour accéder à votre machine virtuelle OpenNebula](#5-utilisation-de-«-remote-viewer-»-pour-accéder-à-votre-machine-virtuelle-opennebula)
+  - [6) Installation d'une distribution Xubuntu](#6-installation-dune-distribution-xubuntu)
+    - [6.1) Configuration des partitions de stockage](#61-configuration-des-partitions-de-stockage)
+    - [6.2) Première connexion et environnement de travail](#62-première-connexion-et-environnement-de-travail)
+  - [7) Découverte de la configuration d'un système Linux Ubuntu](#7-découverte-de-la-configuration-dun-système-linux-ubuntu)
+  - [8) Gestion des utilisateurs](#8-gestion-des-utilisateurs)
+    - [8.1) Configuration et utilisation de la commande sudo](#81-configuration-et-utilisation-de-la-commande-sudo)
+    - [8.2) Gestion des utilisateurs](#82-gestion-des-utilisateurs)
+  - [9) Le système de fichiers](#9-le-système-de-fichiers)
+    - [9.1) Liens symboliques](#91-liens-symboliques)
+    - [9.2) Étude de l’arborescence Linux Standard (FHS)](#92-étude-de-larborescence-linux-standard-fhs)
+  - [10) Installation d'outils essentiels](#10-installation-doutils-essentiels)
+    - [10.1) Outils présents dans les dépôts Ubuntu](#101-outils-présents-dans-les-dépôts-ubuntu)
+    - [10.2) Outils présents dans des dépôts autres que ceux d'Ubuntu](#102-outils-présents-dans-des-dépôts-autres-que-ceux-dubuntu)
+    - [10.3) Outils sous forme de paquet deb](#103-outils-sous-forme-de-paquet-deb)
+- [Partie 2 : Création d'utilisateurs](#partie-2--création-dutilisateurs)
 
-- Partie 3 : Installation d'outils
+- [Partie 3 : Installation d'outils](#partie-3--installation-doutils)
 
-- Structure du projet
+- [Structure du projet](#structure-du-projet)
 
-- Problèmes rencontrés
+- [Problèmes rencontrés](#problèmes-rencontrés)
 
 <br>
 
@@ -66,7 +66,7 @@
 - Soit en double-cliquant sur le fichier "Install Ubuntu.vv"
 - Soit dans un terminal avec la commande :
 ``` HTTP
-remote-viewer répertoire/où/vous/avez/rangé/le/fichier/Install\ Ubuntu.vv
+$ remote-viewer répertoire/où/vous/avez/rangé/le/fichier/Install\ Ubuntu.vv
 ```
 
 <br>
@@ -110,7 +110,7 @@ remote-viewer répertoire/où/vous/avez/rangé/le/fichier/Install\ Ubuntu.vv
 ### 6.2) Première connexion et environnement de travail
 - Redémarrage de notre système après saisie de notre mot de passe :
 ```
-sudo reboot
+$ sudo reboot
 ```
 1. Recherche des paramètres d'affichage dans le menu des applications
 2. Résolution faible
@@ -125,31 +125,31 @@ sudo reboot
 ## 7) Découverte de la configuration d'un système Linux Ubuntu
 - Affichage de la version du noyau Linux installé :
 ```
-uname -r
+$ uname -r
 ```
 1. Mise à jour de la liste des fichiers disponible dans le dépôt :
 ```
-sudo apt update
+$ sudo apt update
 ```
 2. Mise à jour des paquets installés :
 ```
-sudo apt dist-upgrade
+$ sudo apt dist-upgrade
 ```
 3. Liste l’ensemble des paquets installés en filtrant l’affichage aux paquets contenant le mot firefox :
 ```
-dpkg -l | grep "firefox"
+$ dpkg -l | grep "firefox"
 ```
 4. Installation du paquet "vim-gui-common" qui est un éditeur de texte avancé :
 ```
-sudo apt install vim-gui-common
+$ sudo apt install vim-gui-common
 ```
 5. Recherche du paquet des fichiers de base de l'outil de capture photo/vidéo Cheese dans la liste des paquets installés :
 ```
-dpkg -l | grep "Cheese"
+$ dpkg -l | grep "Cheese"
 ```
 - Suppression du paquet "cheese-common" de notre système :
 ```
-sudo apt remove cheese-common
+$ sudo apt remove cheese-common
 ```
 
 <br>
@@ -162,15 +162,15 @@ sudo apt remove cheese-common
 ### 8.1) Configuration et utilisation de la commande sudo
 1. Selon les droits de l'utilisateur "iut", je peux visionner le fichier mais pas le modifier. Avec la commande "sudo", le mot de passe de l'utilisateur est demandé et le fichier peut finalement être modifié
 ```
-sudo evim /etc/sudoers
+$ sudo evim /etc/sudoers
 ```
 2. Ouverture du fichier "group" qui contient les noms du groupe, le numéro d’identification du groupe (gid) et la liste des utilisateurs du groupe
 ```
-sudo evim /etc/group
+$ sudo evim /etc/group
 ```
 3. Sans "sudo", je peux visionner le fichier (*group*) mais pas le modifier
 ```
-grep "sudo" /etc/group
+$ grep "sudo" /etc/group
 ```
 - Résultat : <span style="color:green">sudo:x:27:iut</span>
     - le nom du groupe est "sudo"
@@ -185,18 +185,18 @@ grep "sudo" /etc/group
 #### **Partie 1**
 1. Ouverture du manuel de *adduser* :
 ```
-man adduser
+$ man adduser
 ```
 2. L'uid de iut est **1000** : <span style="color:green">uid=1000(iut)</span>
 3. Le groupe principal de iut est **adm** ou **administrateur** : <span style="color:green">adm:x:4:syslog,iut</span>
 4. L’uid du prochain utilisateur créé par défaut sera **1001**
 5. Création du groupe *invite* :
 ```
-sudo addgroup invite
+$ sudo addgroup invite
 ```
 6. Création d'un nouvel utilisateur :
 ```
-sudo adduser --home /home/utilisateur1 --ingroup user1
+$ sudo adduser --home /home/utilisateur1 --ingroup user1
 ```
 - le nom de l'utilisateur est user1
 - le répertoire d'accueil de l'utilisateur est */home/utilisateur1*
@@ -206,21 +206,21 @@ sudo adduser --home /home/utilisateur1 --ingroup user1
 - Mot de passe : user1
 - Affichage du chemin absolu :
 ```
-pwd
+$ pwd
 ```
 9. Replacement sur l'utilisateur iut :
 - Déconnexion de l'utilisateur user1 :
 ```
-exit
+$ exit
 ```
 - <span style="color:purple">CTRL+ALT+F7</span> : Affichage de la console de connexion en mode graphique
 - Connexion plus pratique à l'utilisateur user1 :
 ```
-su - user1
+$ su - user1
 ```
 - Affichage de l'utilisateur (user1) :
 ```
-echo $USER
+$ echo $USER
 ```
 
 <br>
@@ -228,30 +228,30 @@ echo $USER
 #### **Partie 2**
 1. Ouverture du fichier (*syslog*) mais user1 ne fait pas partie du groupe sudo et donc ne peut pas ouvrir ce fichier
 ```
-sudo evim /var/log/syslog
+$ sudo evim /var/log/syslog
 ```
 2. Changement des privilèges de l’utilisateur user1
 - Déconnexion de l'utilisateur user1 :
 ```
-exit
+$ exit
 ```
 - Ajout de l'utilisateur user1 au groupe adm (administrateur) :
 ```
-sudo adduser user1 adm
+$ sudo adduser user1 adm
 ```
 3. Connexion à l'utilisateur user1 :
 ```
-su - user1
+$ su - user1
 ```
 - Ouverture du fichier (*syslog*) :
 ```
-sudo evim /var/log/syslog
+$ sudo evim /var/log/syslog
 ```
 - Sans sudo = permission de lecture mais pas d'écriture
 - Avec sudo = permission de lecture et d'écriture
 4. Déconnexion de l'utilisateur user1  :
 ```
-exit
+$ exit
 ```
 
 <br>
@@ -264,11 +264,11 @@ exit
 ### 9.1) Liens symboliques
 1. Listage du contenu du dossier *(/lib)*, les fichiers dont le type est désigné par **l** correspond à un lien symbolique :
 ```
-ls -la /usr/lib
+$ ls -la /usr/lib
 ```
 2. Création d'un lien symbolique vers */tmp* avec le nom "monTemp" dans notre répertoire d’accueil :
 ```
-ln -s /tmp monTemp
+$ ln -s /tmp monTemp
 ```
 
 <br>
@@ -277,17 +277,17 @@ ln -s /tmp monTemp
 1. Documentation wikipedia du [FHS](https://fr.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
 2. Affichage du fichier (*cpuinfo*) contenant les informations du processeur :
 ```
-cat /proc/cpuinfo
+$ cat /proc/cpuinfo
 ```
 - Le type du processeur est "Xeon"
 - La fréquence du processeur est de 2194.842 MHz ou 2.20 GHz
 3. Affichage du fichier (*bash-completion*) contenant le manuel de la commande "bash" :
 ```
-cat /usr/share/bash-completion/bash-completion
+$ cat /usr/share/bash-completion/bash-completion
 ```
 4. Affichage du fichier (*version*) :
 ```
-cat /proc/version
+$ cat /proc/version
 ```
 - La version du noyau est 5.15.0-48-generic
 5. Le répertoire qui regroupe les logs du système est */var/log/syslog*
@@ -302,11 +302,11 @@ cat /proc/version
 ### 10.1) Outils présents dans les dépôts Ubuntu
 1. Installation du paquet "git" :
 ```
-sudo apt install git
+$ sudo apt install git
 ```
 2. Installation du paquet "vlc" :
 ```
-sudo apt install vlc
+$ sudo apt install vlc
 ```
 
 <br>
@@ -316,19 +316,19 @@ sudo apt install vlc
 - Documentation [Ubuntu concernant Google Chrome](https://doc.ubuntu-fr.org/google_chrome)
 - Ajout du dépôt de Google à nos dépôts connus :
 ```
-sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+$ sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
 ```
 - Ajout de la clé publique du dépôt à notre liste de clés fiables :
 ```
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+$ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 ```
 - Mise à jour de notre liste de paquet :
 ```
-sudo apt update
+$ sudo apt update
 ```
 - Installation de Google Chrome dans sa version stable :
 ```
-sudo apt install google-chrome-stable
+$ sudo apt install google-chrome-stable
 ```
 
 <br>
@@ -339,7 +339,7 @@ sudo apt install google-chrome-stable
 - Ouverture d'un terminal
 - Installation du paquet DEB :
 ```
-sudo dpkg -i ~/Téléchargements/teams_1.5.00.23861_amd64.deb
+$ sudo dpkg -i ~/Téléchargements/teams_1.5.00.23861_amd64.deb
 ```
 - Lancement de Teams (fonctionnel)
 
@@ -352,7 +352,7 @@ sudo dpkg -i ~/Téléchargements/teams_1.5.00.23861_amd64.deb
 ## Partie 2 : Création d'utilisateurs
 1. Création d'un nouvel utilisateur sans privilèges :
 ```
-sudo adduser --home /home/siko0001 --uid 63725 --gid 100 siko0001
+$ sudo adduser --home /home/siko0001 --uid 63725 --gid 100 siko0001
 ```
 - le nom de l'utilisateur est siko0001
 - le répertoire d'accueil de l'utilisateur est */home/siko0001*
@@ -361,7 +361,7 @@ sudo adduser --home /home/siko0001 --uid 63725 --gid 100 siko0001
 - Nouveau mot de passe : 026d1280
 2. Création d'un nouvel utilisateur avec droits d'administration :
 ```
-sudo adduser --home /home/administrateur --uid 37705 --gid 100 admin
+$ sudo adduser --home /home/administrateur --uid 37705 --gid 100 admin
 ```
 - le nom de l'utilisateur est admin
 - le répertoire d'accueil de l'utilisateur est */home/administrateur*
@@ -370,7 +370,7 @@ sudo adduser --home /home/administrateur --uid 37705 --gid 100 admin
 - Nouveau mot de passe : 463ab9fc
 - Ajout de l'utilisateur admin dans le groupe sudo :
 ```
-sudo adduser admin sudo
+$ sudo adduser admin sudo
 ```
 
 <br>
@@ -383,15 +383,15 @@ sudo adduser admin sudo
 1. Installation de Python 3 :
 - Installation du paquet [python3](https://www.python.org/download/releases/3.0/) (déjà installé et fonctionnel) :
 ```
-sudo apt install python3
+$ sudo apt install python3
 ```
 - Création d'un fichier "test.py" :
 ```
-sudo touch test.py
+$ sudo touch test.py
 ```
 - Lance le fichier test.py avec le langage Python 3.0 et redirige la sortie dans un fichier "sortie_python.txt" :
 ```
-python3 test.py
+$ python3 test.py
 ```
 ![python3](img/python3.png)
 
@@ -400,11 +400,11 @@ python3 test.py
 2. Installation des formateurs de code source :
 - Installation du paquet [black](https://github.com/psf/black) (fonctionnel) :
 ```
-sudo apt install black
+$ sudo apt install black
 ```
 - Lance le formatage du code Python du fichier test.py :
 ```
-black {test.py}
+$ black {test.py}
 ```
 ![black](img/black.png)
 
@@ -412,19 +412,19 @@ black {test.py}
 
 - Installation du paquet [isort](https://github.com/PyCQA/isort) (fonctionnel) :
 ```
-sudo apt install isort
+$ sudo apt install isort
 ```
 - Création d'un fichier "isort_test.py" :
 ```
-sudo touch isort_test.py
+$ sudo touch isort_test.py
 ```
 - Ajout des importations tests :
 ```
-sudo evim isort_test.py
+$ sudo evim isort_test.py
 ```
 - Lance dans le code Python le tri des importations par ordre alphabétique :
 ```
-sudo isort isort_test.py
+$ sudo isort isort_test.py
 ```
 
 |             AVANT              |             APRES              |
@@ -436,11 +436,11 @@ sudo isort isort_test.py
 3. Installation des analyseurs statiques de code :
 - Installation du paquet [bandit](https://github.com/PyCQA/bandit) (fonctionnel) :
 ```
-sudo apt install bandit
+$ sudo apt install bandit
 ```
 - Recherche de problèmes de sécurité courants dans le code Python du fichier "test.py" :
 ```
-sudo bandit test.py
+$ sudo bandit test.py
 ```
 ![bandit](img/test_bandit.png)
 
@@ -448,20 +448,20 @@ sudo bandit test.py
 
 - Installation du paquet [pyflakes](https://github.com/PyCQA/pyflakes) (fonctionnel) :
 ```
-sudo apt install pyflakes
+$ sudo apt install pyflakes
 ```
 - Création d'un fichier "test_pyflakes.py" :
 ```
-sudo touch test_pyflakes.py
+$ sudo touch test_pyflakes.py
 ```
 - Ajout d'une fonction test "Moyenne" :
 ```
-sudo evim test_pyflakes.py
+$ sudo evim test_pyflakes.py
 ```
 ![pyflakes2](img/pyflakes2.png)
 - Lance dans le code Python la vérification des fichiers source et de leurs éventuelles erreurs :
 ```
-sudo python3 -m pyflakes test_pyflakes.py
+$ sudo python3 -m pyflakes test_pyflakes.py
 ```
 ![pyflakes1](img/pyflakes1.png) : Ici, la fonction "randint()" (ligne 12) n'est pas trouvée car elle n'a pas été importé
 
@@ -470,20 +470,20 @@ sudo python3 -m pyflakes test_pyflakes.py
 4. Installation d'un outil de vérification d’annotations de type :
 - Installation du paquet [mypy](https://github.com/python/mypy) (fonctionnel) :
 ```
-sudo apt install mypy
+$ sudo apt install mypy
 ```
 - Création d'un fichier "mypy_test.py" :
 ```
-sudo touch mypy_test.py
+$ sudo touch mypy_test.py
 ```
 - Ajout d'un test en Python :
 ```
-sudo evim mypy_test.py
+$ sudo evim mypy_test.py
 ```
 ![mypy1](img/mypy1.png)
 - Lance dans le code Python la vérification d'une utilisation correct des variables et des fonctions :
 ```
-sudo isort isort_test.py
+$ sudo isort isort_test.py
 ```
 ![mypy2](img/mypy2.png) : Ici, nombre est de type str (chaine de caractères) donc l'addition avec le chiffre 1 n'est pas possible. Pour que cela fonctionne, il faut ajouter la fonction "int()" avant la fonction "input()"
 
@@ -492,75 +492,82 @@ sudo isort isort_test.py
 5. Installation d'un outil de génération de documentation HTML à partir de docstrings :
 - Installation du paquet [doxygen](https://github.com/doxygen/doxygen) (fonctionnel) :
 ```
-sudo apt install doxygen
+$ sudo apt install doxygen
 ```
 - Création d'un fichier "doxygen_test.py" :
 ```
-sudo touch doxygen_test.py
+$ sudo touch doxygen_test.py
 ```
 - Ajout d'exemples de commentaires :
 ```
-sudo evim doxygen_test.py
+$ sudo evim doxygen_test.py
 ```
 ![doxygen](img/doxygen.png)
 
 <br>
 
-6. Installation d'un cadriciel de tests unitaires :
-- Installation du paquet [check](https://github.com/libcheck/check):
+6. Installation d'un cadriciel de tests unitaires (grâce à python3) :
+- Installation du paquet [unittest](https://pypi.org/project/unittest2/) (fonctionnel) :
 ```
-sudo apt install check
+$ sudo apt-get install python3-unittest2
 ```
-- Création d'un fichier "check_test.py" :
+- Création d'un fichier "unittest_test.py" :
 ```
-sudo touch check_test.py
+$ sudo touch unittest_test.py
 ```
-- Ajout d'une fonction test :
+- Ajout de fonctions de vérification :
 ```
-sudo evim check_test.py
+$ sudo evim unittest_test.py
 ```
-![check](img/check.png)
+![unittest](img/unittest.png)
+- Lance le fichier "unittest_test.py" avec Python et redirige la sortie dans "unittest_test.txt:
+```
+$ python3 unittest_test.py > unittest_test.txt
+```
+![pygame2](img/unittest2.png)
 
 <br>
 
 7. Installation de la bibliothèque pygame (grâce à python3) :
 - Installation du paquet [pygame](https://github.com/pygame/pygame) (fonctionnel) :
 ```
-sudo apt-get install python3-pygame
+$ sudo apt-get install python3-pygame
 ```
 - Création d'un fichier "test_pygame.py" :
 ```
-sudo touch test_pygame.py
+$ sudo touch test_pygame.py
 ```
 - Ajout d'un programme simple qui affiche un rectangle bleu dans un canvas :
 ```
-sudo evim test_pygame.py
+$ sudo evim test_pygame.py
 ```
 ![pygame1](img/pygame.png)
-- Lance le fichier "test_pygame.py" avec Python :
+- Lance le fichier "test_pygame.py" avec Python et redirige la sortie dans le fichier "test_pygame.txt" :
 ```
-python3 test_pygame.py
+$ python3 test_pygame.py > test_pygame.txt
 ```
 ![pygame2](img/pygame2.png)
+
+![pygame3](img/pygame3.png)
 
 <br>
 
 8. Installation de Git :
 - Installation du paquet [git](https://github.com/git/git) (déjà installé et fonctionnel) :
 ```
-sudo apt install git
+$ sudo apt install git
 ```
 - On se place dans */Documents* afin de créer un simple dépôt local :
 ```
-cd /home/iut/Documents
+$ cd /home/iut/Documents
 ```
 - Création d'un fichier test "exemple.txt" :
 ```
-sudo touch exemple.txt
+$ sudo touch exemple.txt
 ```
 - Initialisation d'un dépôt local dans *Document/* contenant "exemple.txt" :
 ```
-git init
+$ git init
 ```
 ![git](img/git.png)
 
@@ -569,27 +576,27 @@ git init
 9. Installation de Meld (outil de comparaison et de fusion) :
 - Installation du paquet [meld](https://github.com/GNOME/meld) (fonctionnel) :
 ```
-sudo apt install meld
+$ sudo apt install meld
 ```
 - Création d'un premier fichier de comparaison :
 ```
-sudo touch test_meld1.txt
+$ sudo touch test_meld1.txt
 ```
 - Ajout d'une texte à comparer :
 ```
-sudo evim test_meld1.txt
+$ sudo evim test_meld1.txt
 ```
 - Création d'un deuxième fichier de comparaison :
 ```
-sudo touch test_meld2.txt
+$ sudo touch test_meld2.txt
 ```
 - Ajout d'une texte à comparer :
 ```
-sudo evim test_meld2.txt
+$ sudo evim test_meld2.txt
 ```
 - Permet de comparer le contenu des deux fichiers :
 ```
-meld test_meld1.txt test_meld2.txt
+$ meld test_meld1.txt test_meld2.txt
 ```
 ![meld](img/meld.png)
 
@@ -599,15 +606,15 @@ meld test_meld1.txt test_meld2.txt
 - Téléchargement du fichier .deb sur le site de [Visual Studio Code](https://code.visualstudio.com/Download)
 - Déplacement du fichier de *Téléchargement/* à */home/siko0001/* :
 ```
-sudo mv Téléchargements/code_1.72.2-1665614327_amd64.deb /home/siko0001/
+$ sudo mv Téléchargements/code_1.72.2-1665614327_amd64.deb /home/siko0001/
 ```
 - On se place dans le répertoire */home/siko0001* :
 ```
-cd /home/siko0001
+$ cd /home/siko0001
 ```
 - Installation du paquet DEB :
 ```
-sudo dpkg -i /home/siko0001/code_1.72.2-1665614327_amd64.deb
+$ sudo dpkg -i /home/siko0001/code_1.72.2-1665614327_amd64.deb
 ```
 - Installation des extensions :
 
@@ -620,11 +627,11 @@ sudo dpkg -i /home/siko0001/code_1.72.2-1665614327_amd64.deb
 11.  Ecriture de programmes Python :
 - Création du fichier de test de programmes Python :
 ```
-sudo touch test.py
+$ sudo touch test.py
 ```
 - Ajout de 4 programmes Python :
 ```
-sudo evim test.py
+$ sudo evim test.py
 ```
 - Sortie des programmes dans un fichier "sortie_python.txt"
 
@@ -663,8 +670,7 @@ sudo evim test.py
 <br>&emsp;&emsp;&emsp;<span style="color:orange">___siko0001/___</span>
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___code_1.72.2-1665614327_amd64.deb___</span>
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:lime">___tests/___</span>
-<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:cyan">___check_test.py___
-<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___doxygen_test.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span style="color:cyan">___doxygen_test.py___
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___isort_test.py___
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___mypy_test.py___
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___sortie_python.txt___
@@ -672,7 +678,10 @@ sudo evim test.py
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_meld2.txt___
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test.py___
 <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pyflakes.py___
-<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pygame.py___</span>
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pyflakes.txt___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pygame.py___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___test_pygame.txt___
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;___unittest_test.py___</span>
 <br>&emsp;&emsp;&emsp;<span style="color:orange">___administrateur/___</span>
 
 <br>
